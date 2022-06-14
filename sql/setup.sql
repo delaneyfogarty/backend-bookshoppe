@@ -24,7 +24,7 @@ CREATE table books (
 		released INT NOT NULL
 );
 
-INSERT INTO books (title, year) VALUES
+INSERT INTO books (title, released) VALUES
 ('Beloved', 1987),
 ('Song of Solomon', 1977),
 ('Half of a Yellow Sun', 2006),

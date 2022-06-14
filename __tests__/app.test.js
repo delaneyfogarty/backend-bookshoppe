@@ -21,7 +21,6 @@ describe('backend-express-template routes', () => {
   it('/authors/:id should return one author from the list', async () => {
     const res = await request(app).get('/authors/1');
     const toni = {
-      id: '1',
       name: 'Toni Morrison',
       dob: '1931-02-18T08:00:00.000Z',
       pob: 'Lorain, OH',
@@ -41,7 +40,7 @@ describe('backend-express-template routes', () => {
     const res = await request(app).get('/books/1');
     const beloved = {
       title: 'Beloved',
-      released: '1987',
+      released: 1987,
     };
     expect(res.body).toEqual(beloved);
   });
