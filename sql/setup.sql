@@ -3,9 +3,10 @@
 
 DROP table if exists authors;
 DROP table if exists books;
+DROP table if exists junction;
 
 CREATE table authors (
-	id BIGINT GENERATED ALWAYS AS IDENTITY,
+	id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	name VARCHAR NOT NULL,
 	dob DATE NOT NULL,
 	pob VARCHAR NOT NULL
@@ -19,7 +20,7 @@ INSERT INTO authors (name, dob, pob) VALUES
 ('Angela Carter', '05/07/1940', 'Eastbourne, UK');
 
 CREATE table books (
-		id BIGINT GENERATED ALWAYS AS IDENTITY,
+		id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 		title VARCHAR NOT NULL,
 		released INT NOT NULL
 );
@@ -35,3 +36,23 @@ INSERT INTO books (title, released) VALUES
 ('The Bloody Chamber', 1979),
 ('The Magic Toyshop', 1967),
 ('Nights at the Circus', 1984);
+
+CREATE table junction (
+	id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	author_id BIGINT,
+	book_id BIGINT,
+	FOREIGN KEY (author_id) REFERENCES authors(id),
+	FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+INSERT INTO junction (author_id, book_id) VALUES
+(1,1),
+(1,2),
+(2,3),
+(2,4),
+(3,5),
+(3,6),
+(4,7),
+(5,8),
+(5,9),
+(5,10);
