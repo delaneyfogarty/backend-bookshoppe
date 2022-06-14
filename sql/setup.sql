@@ -21,7 +21,7 @@ INSERT INTO authors (name, dob, pob) VALUES
 CREATE table books (
 		id BIGINT GENERATED ALWAYS AS IDENTITY,
 		title VARCHAR NOT NULL,
-		year INT NOT NULL
+		released INT NOT NULL
 );
 
 INSERT INTO books (title, year) VALUES
