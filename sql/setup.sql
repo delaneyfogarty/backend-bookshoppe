@@ -1,14 +1,14 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
 
-DROP table if exists authors;
-DROP table if exists books;
+DROP table if exists authors CASCADE;
+DROP table if exists books CASCADE;
 DROP table if exists junction;
 
 CREATE table authors (
 	id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	name VARCHAR NOT NULL,
-	dob DATE NOT NULL,
+	dob VARCHAR NOT NULL,
 	pob VARCHAR NOT NULL
 );
 
@@ -48,9 +48,11 @@ CREATE table junction (
 INSERT INTO junction (author_id, book_id) VALUES
 (1,1),
 (1,2),
+(1,3),
 (2,3),
 (2,4),
 (3,5),
+(3,6),
 (3,6),
 (4,7),
 (5,8),
