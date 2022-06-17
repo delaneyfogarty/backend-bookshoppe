@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Book = require('../lib/models/Book');
 
 const { books } = require('../data/books-data');
 
@@ -26,5 +27,17 @@ describe('backend-express-template routes', () => {
   });
   afterAll(() => {
     pool.end();
+  });
+
+  it('Add a new book', async () => {
+    const newBook = new Book({
+      id: '11',
+      title: 'Feminism is for Everybody',
+      released: 2000,
+    });
+    const res = await request(app).post('/books').send(newBook);
+    expect(res.body.id).toEqual(newBook.id);
+    expect(res.body.title).toEqual(newBook.title);
+    expect(res.body.released).toEqual(newBook.released);
   });
 });

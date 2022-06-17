@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Author = require('../lib/models/Author');
 
 const { authors } = require('../data/authors-data');
 
@@ -25,12 +26,17 @@ describe('backend-express-template routes', () => {
     expect(res.body).toHaveProperty('books');
   });
 
-  // it('POST /authors should create a new author with an associated book', async () => {
-  //   const res = await (
-  //     await request(app).post('/authors')
-  //   ).send({
-  //     name: 'Loretta Lynn',
-  //     bookIds: [1, 2],
-  //   });
-  // });
+  it('Add a new author', async () => {
+    const newAuthor = new Author({
+      id: '6',
+      name: 'Bell Hooks',
+      dob: '09/25/52',
+      pob: 'Hopkinsville, KY',
+    });
+    const res = await request(app).post('/authors').send(newAuthor);
+    expect(res.body.id).toEqual(newAuthor.id);
+    expect(res.body.name).toEqual(newAuthor.name);
+    expect(res.body.dob).toEqual(newAuthor.dob);
+    expect(res.body.pob).toEqual(newAuthor.pob);
+  });
 });
